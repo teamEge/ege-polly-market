@@ -1,16 +1,9 @@
 'use client'
 
-import styled from 'styled-components';
-
-
-const Text = styled.p`
-  padding: 20px;
-`;
+import HomePage from '../pages/home';
 
 export default function Home() {
   return (
-    <div>
-      <Text>Example NextJS with Styled components</Text>
-    </div>
+    <HomePage />
   );
 }
