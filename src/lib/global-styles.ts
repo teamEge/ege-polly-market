@@ -22,6 +22,14 @@ export const GlobalStyles = createGlobalStyle`
     max-width: 1440px;
     width: 100%;
     margin: 0 auto; /* Centers the container */
-    padding: 0 20px; /* Optional: adds horizontal padding */
+    padding: 10px 20px; /* Optional: adds horizontal padding */
   }
+
+    .footerArea{
+      display:flex;
+      justify-content:center;
+      background-color: #007bff;
+      padding: 10px 20px;
+      color: white;
+    }
 `;
