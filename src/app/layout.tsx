@@ -22,7 +22,7 @@ export default function RootLayout({
         <StyledComponentsRegistry>
           <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
             <Head>
-              <title>My Next.js App</title>
+              <title>Polly App</title>
               <meta name="description" content="A simple Next.js app" />
             </Head>
             <Header logoName="PollyMarket" />
@@ -30,7 +30,7 @@ export default function RootLayout({
               {children}
             </main>
             <footer className='footerArea'>
-              <p>© 2024 My Next.js App</p>
+              <p>© 2024 Polly App</p>
             </footer>
           </div>
         </StyledComponentsRegistry>
