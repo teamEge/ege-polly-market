@@ -1,25 +1,25 @@
 'use client'
 import React, { ReactNode } from 'react';
 import { StyledHeader } from './StyledHeader.styled';
+import { StyledButton } from '../Button/StyledButton.styled';
 
 
 interface HeaderProps {
-    className?: string;  // Optional className prop
+    logoName?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ className }) => {
+const Header: React.FC<HeaderProps> = ({ logoName }) => {
     return (
-        <StyledHeader className={className}>
-
-            <h1> Header alanı</h1>
-            <nav>
+        <StyledHeader >
+            <div className="logo">{logoName}</div>
+            <nav className="navbar">
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="/dashboard">dashboard</a></li>
                     <li><a href="/politics">politics</a></li>
                 </ul>
             </nav>
-
+            <StyledButton> Login </StyledButton>
         </StyledHeader>
     );
 };

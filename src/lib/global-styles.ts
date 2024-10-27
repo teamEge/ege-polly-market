@@ -17,4 +17,11 @@ export const GlobalStyles = createGlobalStyle`
     text-decoration: none;
     color: inherit;
   }
+
+  .containerBig{
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto; /* Centers the container */
+    padding: 0 20px; /* Optional: adds horizontal padding */
+  }
 `;

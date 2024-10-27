@@ -22,13 +22,13 @@ export default function RootLayout({
         <GlobalStyles />
         <StyledComponentsRegistry>
 
-          <div className='container'>
+          <div>
             <Head>
               <title>My Next.js App</title>
               <meta name="description" content="A simple Next.js app" />
             </Head>
-            <Header />
-            <main>
+            <Header logoName="PollyMarket" />
+            <main className='containerBig'>
               {children}
             </main>
             {/* <footer>

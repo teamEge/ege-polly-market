@@ -2,13 +2,12 @@ import React, { ReactNode } from 'react';
 import { StyledButton } from './StyledButton.styled';
 
 interface ButtonProps {
-  className?: string;  // Optional className prop
   children: ReactNode;  // Required children prop
 }
 
-const Button: React.FC<ButtonProps> = ({ className, children }) => {
+const Button: React.FC<ButtonProps> = ({ children }) => {
   return (
-    <StyledButton className={className}>
+    <StyledButton >
       {children}
     </StyledButton>
   );
