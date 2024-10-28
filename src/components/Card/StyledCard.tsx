@@ -27,7 +27,7 @@ const Card: React.FC<CardProps> = ({ leftLogoName, leftLogo, leftRate, rightLogo
                         <div className='card-left-logo-name'>{leftLogoName}</div>
                     </div>
 
-                    <div className='card-left-logo-rate'>{leftRate}</div>
+                    <div className='card-left-rate'>{leftRate}</div>
                 </div>
 
                 <div className='card-right'>
@@ -39,7 +39,7 @@ const Card: React.FC<CardProps> = ({ leftLogoName, leftLogo, leftRate, rightLogo
                         <div className='card-right-logo-name'>{rightLogoName}</div>
                     </div>
 
-                    <div className='card-right-logo-rate'>{rightRate}</div>
+                    <div className='card-right-rate'>{rightRate}</div>
                 </div>
 
             </div>
