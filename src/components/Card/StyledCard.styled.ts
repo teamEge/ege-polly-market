@@ -7,8 +7,7 @@ export const StyledCard = styled.div`
     padding: 32px 40px 22px;
     height: 220px;
     border-radius: 20px;
-    background-color: grey;
-
+    background-color: black;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
     color: white; /* Optional: sets text color */
 

@@ -15,7 +15,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ leftLogoName, leftLogo, leftRate, rightLogoName, rightLogo, rightRate }) => {
     return (
-        <StyledCard>
+        <StyledCard className='containerMid'>
             <div className='card'>
 
                 <div className='card-left'>
