@@ -2,7 +2,7 @@
 import React, { ReactNode } from 'react';
 import { StyledHeader } from './StyledHeader.styled';
 import { StyledButton } from '../Button/StyledButton.styled';
-
+import { QqOutlined } from '@ant-design/icons';
 
 interface HeaderProps {
     logoName?: string;
@@ -11,7 +11,8 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ logoName }) => {
     return (
         <StyledHeader >
-            <div className="logo">{logoName}</div>
+            
+            <div className="logo"><QqOutlined /> {logoName}  </div>
             <nav className="navbar">
                 <ul>
                     <li><a href="/">Home</a></li>
