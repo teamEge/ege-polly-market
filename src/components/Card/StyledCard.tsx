@@ -1,6 +1,7 @@
 'use client'
 import React from 'react';
 import { StyledCard } from './StyledCard.styled';
+import { Image } from 'antd';
 
 
 interface CardProps {
@@ -19,7 +20,10 @@ const Card: React.FC<CardProps> = ({ leftLogoName, leftLogo, leftRate, rightLogo
 
                 <div className='card-left'>
                     <div className='card-left-logo'>
-                        <img src={leftLogo}></img>
+                        <Image
+                            width={100}
+                            src={leftLogo}
+                        />
                         <div className='card-left-logo-name'>{leftLogoName}</div>
                     </div>
 
@@ -28,7 +32,10 @@ const Card: React.FC<CardProps> = ({ leftLogoName, leftLogo, leftRate, rightLogo
 
                 <div className='card-right'>
                     <div className='card-right-logo'>
-                        <img src={rightLogo}></img>
+                        <Image
+                            width={100}
+                            src={rightLogo}
+                        />
                         <div className='card-right-logo-name'>{rightLogoName}</div>
                     </div>
 

@@ -5,7 +5,7 @@ import Card from '@/components/Card/StyledCard';
 const HomePage: React.FC = () => {
     return (
         <HomeStyled className='home'>
-            <Card leftLogoName="Trump" leftLogo="" leftRate="65%" rightLogoName="Harris" rightLogo="" rightRate="35%" />
+            <Card leftLogoName="Trump" leftLogo="/images/trump.png" leftRate="65%" rightLogoName="Harris" rightLogo="/images/harris.png" rightRate="35%" />
         </HomeStyled>
     );
 };
