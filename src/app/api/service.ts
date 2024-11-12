@@ -14,7 +14,7 @@ enum Prediction {
   Draw
 }
 
-interface Match {
+ interface Match {
   homeTeam: string;
   awayTeam: string;
   score: string;
