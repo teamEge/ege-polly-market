@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { HomeStyled } from "./pageStyles/home.styled";
 import Card from "@/components/Card/StyledCard";
+import BetContractService from "../app/api/service";
 
 const HomePage: React.FC = () => {
+  const [matches, setMatches] = useState();
+
+  useEffect(() => {
+    const betService = new BetContractService();
+    const matches = betService.getMatches();
+    console.log(matches)
+  }, []);
+
+    
   return (
     <HomeStyled className="home">
       <Card
