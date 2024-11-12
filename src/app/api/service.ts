@@ -1,14 +1,18 @@
-import { ethers } from "ethers";
-import { BigNumber } from "ethers";
+import { ethers, BigNumber } from "ethers";
 
 // ABI ve Kontrat Adresi
-const BET_CONTRACT_ABI = [ 'src\app\api\abis\BetContractABI.json' ]
-const FOOTBALL_DATA_CONTRACT_ABI = ['src\app\api\abis\FootballData.abi.json'];
+import BET_CONTRACT_ABI from 'src/app/api/abis/BetContractABI.json';
+import FOOTBALL_DATA_CONTRACT_ABI from 'src/app/api/abis/FootballData.abi.json';
 
 const BET_CONTRACT_ADDRESS = "0x7535f5042040b76aad21b9442b5f9499b9e3bba6";
 const FOOTBALL_DATA_CONTRACT_ADDRESS = "0x21391ef65f2768125c94443e51df830ce5021bdc";
 
-type Prediction = "HomeWin" | "AwayWin" | "Draw";
+// Tahmin türü
+enum Prediction {
+  HomeWin,
+  AwayWin,
+  Draw
+}
 
 interface Match {
   homeTeam: string;
@@ -20,15 +24,19 @@ interface Match {
 
 class BetContractService {
   private provider: ethers.providers.Web3Provider;
+  private signer: ethers.Signer;
   private betContract: ethers.Contract;
   private footballDataContract: ethers.Contract;
-  private signer: ethers.Signer;
 
   constructor() {
-    this.provider = new ethers.providers.Web3Provider((window as any).ethereum);
-    this.signer = this.provider.getSigner();
-    this.betContract = new ethers.Contract(BET_CONTRACT_ADDRESS, BET_CONTRACT_ABI, this.signer);
-    this.footballDataContract = new ethers.Contract(FOOTBALL_DATA_CONTRACT_ADDRESS, FOOTBALL_DATA_CONTRACT_ABI, this.provider);
+    if (typeof window !== 'undefined' && (window as any).ethereum) {
+      this.provider = new ethers.providers.Web3Provider((window as any).ethereum);
+      this.signer = this.provider.getSigner();
+      this.betContract = new ethers.Contract(BET_CONTRACT_ADDRESS, BET_CONTRACT_ABI, this.signer);
+      this.footballDataContract = new ethers.Contract(FOOTBALL_DATA_CONTRACT_ADDRESS, FOOTBALL_DATA_CONTRACT_ABI, this.provider);
+    } else {
+      throw new Error("Ethereum provider (like MetaMask) not found.");
+    }
   }
 
   // Maç bilgilerini almak
@@ -68,7 +76,7 @@ class BetContractService {
       const bet = await this.betContract.matchBets(matchIndex).userBets(userAddress);
       return {
         amount: bet.amount,
-        prediction: Prediction[bet.prediction],
+        prediction: bet.prediction,
       };
     } catch (error) {
       console.error("Error fetching user bet:", error);
