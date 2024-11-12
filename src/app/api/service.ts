@@ -1,8 +1,8 @@
 import { ethers, BigNumber } from "ethers";
 
 // ABI ve Kontrat Adresi
-import BET_CONTRACT_ABI from 'src/app/api/abis/BetContractABI.json';
-import FOOTBALL_DATA_CONTRACT_ABI from 'src/app/api/abis/FootballData.abi.json';
+import BET_CONTRACT_ABI from '../api/abis/BetContractABI.json';
+import FOOTBALL_DATA_CONTRACT_ABI from '../api/abis/FootballData.abi.json';
 
 const BET_CONTRACT_ADDRESS = "0x7535f5042040b76aad21b9442b5f9499b9e3bba6";
 const FOOTBALL_DATA_CONTRACT_ADDRESS = "0x21391ef65f2768125c94443e51df830ce5021bdc";
