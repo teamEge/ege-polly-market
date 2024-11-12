@@ -1,0 +1,95 @@
+import { ethers } from "ethers";
+import { BigNumber } from "ethers";
+
+// ABI ve Kontrat Adresi
+const BET_CONTRACT_ABI = [ 'src\app\api\abis\BetContractABI.json' ]
+const FOOTBALL_DATA_CONTRACT_ABI = ['src\app\api\abis\FootballData.abi.json'];
+
+const BET_CONTRACT_ADDRESS = "0x7535f5042040b76aad21b9442b5f9499b9e3bba6";
+const FOOTBALL_DATA_CONTRACT_ADDRESS = "0x21391ef65f2768125c94443e51df830ce5021bdc";
+
+type Prediction = "HomeWin" | "AwayWin" | "Draw";
+
+interface Match {
+  homeTeam: string;
+  awayTeam: string;
+  score: string;
+  isFinished: boolean;
+  endTime: BigNumber;
+}
+
+class BetContractService {
+  private provider: ethers.providers.Web3Provider;
+  private betContract: ethers.Contract;
+  private footballDataContract: ethers.Contract;
+  private signer: ethers.Signer;
+
+  constructor() {
+    this.provider = new ethers.providers.Web3Provider((window as any).ethereum);
+    this.signer = this.provider.getSigner();
+    this.betContract = new ethers.Contract(BET_CONTRACT_ADDRESS, BET_CONTRACT_ABI, this.signer);
+    this.footballDataContract = new ethers.Contract(FOOTBALL_DATA_CONTRACT_ADDRESS, FOOTBALL_DATA_CONTRACT_ABI, this.provider);
+  }
+
+  // Maç bilgilerini almak
+  async getMatches(): Promise<Match[]> {
+    try {
+      const matches: any[] = await this.footballDataContract.getMatches();
+      return matches.map((match) => ({
+        homeTeam: match.homeTeam,
+        awayTeam: match.awayTeam,
+        score: match.score,
+        isFinished: match.isFinished,
+        endTime: match.endTime,
+      }));
+    } catch (error) {
+      console.error("Error fetching matches:", error);
+      throw error;
+    }
+  }
+
+  // Bahis yapmak
+  async placeBet(matchIndex: number, prediction: Prediction, betAmount: string): Promise<void> {
+    try {
+      const tx = await this.betContract.placeBet(matchIndex, prediction, {
+        value: ethers.utils.parseEther(betAmount),
+      });
+      await tx.wait();
+      console.log("Bet placed successfully!");
+    } catch (error) {
+      console.error("Error placing bet:", error);
+      throw error;
+    }
+  }
+
+  // Kullanıcının yaptığı bahisleri almak
+  async getUserBet(matchIndex: number, userAddress: string): Promise<{ amount: BigNumber; prediction: Prediction }> {
+    try {
+      const bet = await this.betContract.matchBets(matchIndex).userBets(userAddress);
+      return {
+        amount: bet.amount,
+        prediction: Prediction[bet.prediction],
+      };
+    } catch (error) {
+      console.error("Error fetching user bet:", error);
+      throw error;
+    }
+  }
+
+  // Kazanan sonuçları görüntülemek
+  async getWinningPool(matchIndex: number): Promise<{ homeWin: BigNumber; awayWin: BigNumber; draw: BigNumber }> {
+    try {
+      const matchBet = await this.betContract.matchBets(matchIndex);
+      return {
+        homeWin: matchBet.totalHomeWin,
+        awayWin: matchBet.totalAwayWin,
+        draw: matchBet.totalDraw,
+      };
+    } catch (error) {
+      console.error("Error fetching winning pool:", error);
+      throw error;
+    }
+  }
+}
+
+export default BetContractService;
